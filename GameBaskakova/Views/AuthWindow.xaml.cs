@@ -24,5 +24,27 @@ namespace GameBaskakova
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Reg_Auth.SelectedIndex= 1;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Reg_Auth.SelectedIndex= 0;
+        }
+
+        private void LoginName_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (LoginName.Text == "Логин")
+                LoginName.Text = "";
+        }
+
+        private void LoginPass_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (LoginPass.Text == "Пароль")
+                LoginPass.Text = "";
+        }
     }
 }
