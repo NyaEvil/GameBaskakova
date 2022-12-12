@@ -46,5 +46,22 @@ namespace GameBaskakova
             if (LoginPass.Text == "Пароль")
                 LoginPass.Text = "";
         }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            System.Diagnostics.Process.Start(gitlink.NavigateUri.ToString());
+        }
+
+        private void RegPass_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (RegPass.Text == "Пароль")
+                RegPass.Text = "";
+        }
+
+        private void RegName_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (RegName.Text == "Логин")
+                RegName.Text = "";
+        }
     }
 }

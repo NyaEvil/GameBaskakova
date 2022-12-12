@@ -18,34 +18,64 @@
         <StackPanel Grid.Row="0">
             <Label Content="Б.А.С.К.А.К.О.В.А." HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" FontFamily="Impact" FontSize="72"/>
         </StackPanel>
-        <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Row="4" TextWrapping="Wrap" TextAlignment="Center"  Width="171"> Created by NyaEvil | <Hyperlink NavigateUri="https://github.com/NyaEvil">GitHub</Hyperlink>
+        <TextBlock HorizontalAlignment="Right" Padding="5" Grid.Row="4" TextWrapping="Wrap" TextAlignment="Center"  Width="171"> Created by NyaEvil | <Hyperlink x:Name="gitlink" NavigateUri="https://github.com/NyaEvil" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
         </TextBlock>
         <TabControl Grid.Row="1" Name="Reg_Auth">
-            <TabItem Header="TabItem" Name="Registration" Visibility="Visible">
+            <TabItem Header="TabItem" Name="Authorization" Visibility="Collapsed">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="79*"/>
+                        <ColumnDefinition Width="237*"/>
                         <ColumnDefinition Width="119*"/>
+                        <ColumnDefinition Width="237*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="151*"/>
-                        <RowDefinition Height="151*"/>
-                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="64*"/>
+                        <RowDefinition Height="46*"/>
+                        <RowDefinition Height="21*"/>
+                        <RowDefinition Height="45*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Column="1" Grid.Row="1" Margin="0,151,0,0" Grid.RowSpan="2">
+                    <Grid Grid.Column="1" Grid.Row="3" Margin="0,3,0,0" Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="134*"/>
                             <ColumnDefinition Width="131*"/>
                         </Grid.ColumnDefinitions>
                     </Grid>
-                    <TextBox x:Name="LoginPass" Grid.Column="1" Grid.Row="1" Padding="0" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Center" Width="237" Height="30" PreviewMouseDown="LoginPass_PreviewMouseDown"/>
-                    <TextBox x:Name="LoginName" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Логин" FontSize="20" VerticalAlignment="Center" Padding="1" Width="237" Height="30" PreviewMouseDown="LoginName_PreviewMouseDown"/>
-                    <Label Content="Логин" Padding="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" Height="36" Width="98" Margin="118,55,0,0"/>
-                    <Label Grid.Row="1" Content="Пароль" Padding="0"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="24" Height="36" Width="98" Margin="118,55,0,0"/>
+                    <TextBox x:Name="LoginPass" Grid.Column="1" Grid.Row="1" Padding="0" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Width="237" Height="30" PreviewMouseDown="LoginPass_PreviewMouseDown" Margin="0,6,0,0" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="LoginName" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Логин" FontSize="20" VerticalAlignment="Center" Padding="1" Width="237" Height="30" PreviewMouseDown="LoginName_PreviewMouseDown" Grid.ColumnSpan="2"/>
+                    <Label Content="Логин" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24" Height="36" Width="98" Margin="118,0,0,0"/>
+                    <Label Content="Пароль" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="24" Height="36" Width="98" Margin="0,128,21,0" Grid.RowSpan="2"/>
+                    <Button x:Name="AuthButton" Grid.Column="1" Content="Авторизоваться" Grid.Row="2" FontSize="14"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Text="Нет учётной записи?"></TextBlock>
+                    <TextBlock Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="237,16,237,0"><Hyperlink Click="Button_Click">Создать</Hyperlink></TextBlock>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem" Name="Authorization" Visibility="Visible">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="TabItem" Name="Registration" Visibility="Collapsed">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="237*"/>
+                        <ColumnDefinition Width="119*"/>
+                        <ColumnDefinition Width="237*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="64*"/>
+                        <RowDefinition Height="46*"/>
+                        <RowDefinition Height="21*"/>
+                        <RowDefinition Height="45*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="1" Grid.Row="3" Margin="0,3,0,0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="134*"/>
+                            <ColumnDefinition Width="131*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <TextBox x:Name="RegPass" Grid.Column="1" Grid.Row="1" Padding="0" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Width="237" Height="30" PreviewMouseDown="RegPass_PreviewMouseDown" Margin="0,6,0,0" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="RegName" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Логин" FontSize="20" VerticalAlignment="Center" Padding="1" Width="237" Height="30" PreviewMouseDown="RegName_PreviewMouseDown" Grid.ColumnSpan="2"/>
+                    <Label Content="Логин" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24" Height="36" Width="98" Margin="118,0,0,0"/>
+                    <Label Content="Пароль" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="24" Height="36" Width="98" Margin="0,136,21,0" Grid.RowSpan="2"/>
+                    <Button x:Name="RegButton" Grid.Column="1" Content="Зарегистрироваться" Grid.Row="2" FontSize="12"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Text="Есть учётная запись?"></TextBlock>
+                    <TextBlock Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="237,16,237,0"><Hyperlink Click="Button_Click_1">Войти</Hyperlink></TextBlock>
+                </Grid>
             </TabItem>
         </TabControl>
         <ProgressBar Grid.Row="3"/>
