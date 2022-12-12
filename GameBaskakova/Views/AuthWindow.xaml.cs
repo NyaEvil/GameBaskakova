@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace GameBaskakova
 {
@@ -62,6 +65,40 @@ namespace GameBaskakova
         {
             if (RegName.Text == "Логин")
                 RegName.Text = "";
+        }
+
+        private void AuthButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+                connection.Open();
+                string commandstr = $"INSERT INTO sys.test VALUES (null,'{RegName.Text}', '{RegPass.Text}')";
+                var commandexec = new MySqlCommand(commandstr, connection);
+                commandexec.ExecuteNonQuery();
+                connection.Close();
+            } 
+            catch (Exception er)
+            {
+                var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+                connection.Open();
+                var commandexec = new MySqlCommand("select max(idtest) from sys.test", connection);
+                MySqlDataReader myReader;
+                myReader = commandexec.ExecuteReader();
+                myReader.Read();
+                int i = Convert.ToInt32(myReader.GetString(0));
+                myReader.Close();
+                i -= 1;
+                commandexec = new MySqlCommand($"ALTER TABLE sys.test AUTO_INCREMENT={i}", connection);
+                commandexec.ExecuteNonQuery();
+                connection.Close();
+                MessageBox.Show(er.ToString());
+            }
         }
     }
 }
