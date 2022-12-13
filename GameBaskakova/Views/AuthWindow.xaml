@@ -68,7 +68,7 @@
                             <ColumnDefinition Width="131*"/>
                         </Grid.ColumnDefinitions>
                     </Grid>
-                    <TextBox x:Name="RegPass" Grid.Column="1" Grid.Row="1" Padding="0" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Width="237" Height="30" PreviewMouseDown="RegPass_PreviewMouseDown" Margin="0,6,0,0" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="RegPass" Grid.Column="1" Grid.Row="1" Padding="0" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="237" Height="30" PreviewMouseDown="RegPass_PreviewMouseDown" Margin="0,6,0,0" Grid.ColumnSpan="2"/>
                     <TextBox x:Name="RegName" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Логин" FontSize="20" VerticalAlignment="Center" Padding="1" Width="237" Height="30" PreviewMouseDown="RegName_PreviewMouseDown" Grid.ColumnSpan="2"/>
                     <Label Content="Логин" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24" Height="36" Width="98" Margin="118,0,0,0"/>
                     <Label Content="Пароль" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="24" Height="36" Width="98" Margin="0,136,21,0" Grid.RowSpan="2"/>
@@ -78,6 +78,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <ProgressBar Grid.Row="3"/>
+        <ProgressBar x:Name="ConCheck" Grid.Row="3" Loaded="ConCheck_Loaded"/>
+        <Label x:Name="ConLabel" Content="" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" FontSize="16"/>
     </Grid>
 </Window>

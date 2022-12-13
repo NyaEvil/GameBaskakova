@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data;
@@ -27,6 +29,10 @@ namespace GameBaskakova
         {
             InitializeComponent();
         }
+
+        static private string Login;
+
+        static private string Password;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +75,7 @@ namespace GameBaskakova
 
         private void AuthButton_Click(object sender, RoutedEventArgs e)
         {
+            ConnectionCheck();
             var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
             connection.Open();
             string commandstr = $"SELECT * FROM sys.test WHERE name = '{LoginName.Text}' AND pass = '{LoginPass.Text}'";
@@ -77,6 +84,11 @@ namespace GameBaskakova
             if (reader.Read())
             {
                 MessageBox.Show("Авторизация успешна");
+                Login = LoginName.Text;
+                Password = LoginPass.Text;
+                Application.Current.MainWindow = new GameBaskakova.Views.Window1();
+                Application.Current.MainWindow.Show();
+                this.Close();
             } else
             {
                 MessageBox.Show("Что-то не так");
@@ -87,6 +99,7 @@ namespace GameBaskakova
 
         private void RegButton_Click(object sender, RoutedEventArgs e)
         {
+            ConnectionCheck();
             try
             {
                 var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
@@ -94,6 +107,21 @@ namespace GameBaskakova
                 string commandstr = $"INSERT INTO sys.test VALUES (null,'{RegName.Text}', '{RegPass.Text}')";
                 var commandexec = new MySqlCommand(commandstr, connection);
                 commandexec.ExecuteNonQuery();
+                commandstr = $"SELECT * FROM sys.test WHERE name = '{RegName.Text}' AND pass = '{RegPass.Text}'";
+                commandexec = new MySqlCommand(commandstr, connection);
+                var reader = commandexec.ExecuteReader();
+                if (reader.Read())
+                {
+                    MessageBox.Show("Регистрация успешна");
+                    Login = RegName.Text;
+                    Password = RegPass.Text;
+                    Application.Current.MainWindow = new GameBaskakova.Views.Window1();
+                    Application.Current.MainWindow.Show();
+                    this.Close();
+                } else
+                {
+                    MessageBox.Show("Что-то пошло не так");
+                }
                 connection.Close();
             } 
             catch (Exception er)
@@ -111,6 +139,43 @@ namespace GameBaskakova
                 commandexec.ExecuteNonQuery();
                 connection.Close();
                 MessageBox.Show(er.ToString());
+            }
+        }
+
+        private void ConCheck_Loaded(object sender, RoutedEventArgs e)
+        {
+            ConnectionCheck();
+        }
+
+        private void ConnectionCheck()
+        {
+            bool check = false;
+            ConCheck.Maximum = 3;
+            ConCheck.Value = 1;
+            ConLabel.Content = "Загрузка";
+            try
+            {
+                ConCheck.Value = 2;
+                ConLabel.Content = "Попытка открыть соединение";
+                var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+                connection.Open();
+                var commandexec = new MySqlCommand("select max(idtest) from sys.test", connection);
+                MySqlDataReader myReader = commandexec.ExecuteReader();
+                check = myReader.Read();
+            }
+            catch (Exception er)
+            {
+                ConCheck.Background = new SolidColorBrush(Colors.Red);
+                MessageBox.Show(er.ToString(), "Ошибка подключения");
+                ConLabel.Content = "Ошибка подключения";
+            }
+            finally
+            {
+                if (check)
+                {
+                    ConLabel.Content = "Соединение установлено";
+                    ConCheck.Value = 3;
+                }
             }
         }
     }
