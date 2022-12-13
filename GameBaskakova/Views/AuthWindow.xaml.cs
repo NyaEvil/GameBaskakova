@@ -69,7 +69,20 @@ namespace GameBaskakova
 
         private void AuthButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+            connection.Open();
+            string commandstr = $"SELECT * FROM sys.test WHERE name = '{LoginName.Text}' AND pass = '{LoginPass.Text}'";
+            var commandexec = new MySqlCommand(commandstr, connection);
+            var reader = commandexec.ExecuteReader();
+            if (reader.Read())
+            {
+                MessageBox.Show("Авторизация успешна");
+            } else
+            {
+                MessageBox.Show("Что-то не так");
+            }
+            reader.Close();
+            connection.Close();
         }
 
         private void RegButton_Click(object sender, RoutedEventArgs e)
