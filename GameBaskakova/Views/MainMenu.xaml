@@ -16,7 +16,7 @@
             <RowDefinition Height="33*"/>
         </Grid.RowDefinitions>
         <TabControl Grid.Row="1" Background="Firebrick">
-            <TabItem x:Name="MainMenuTab" Header="TabItem">
+            <TabItem x:Name="MainMenuTab" Header="TabItem" Visibility="Visible">
                 <Grid Background="FireBrick">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"/>
@@ -24,16 +24,30 @@
                         <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="237*"/>
-                        <ColumnDefinition Width="160*"/>
+                        <ColumnDefinition Width="211*"/>
+                        <ColumnDefinition Width="263*"/>
+                        <ColumnDefinition Width="320*"/>
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="MainMenuImage" Source="/Views/MainMenu.jpg" Grid.Column="1" Grid.RowSpan="3"/>
+                    <Image x:Name="MainMenuImage" Source="/Views/MainMenu.jpg" Grid.Column="2" Grid.RowSpan="3"/>
+                    <Grid Background="Black" Grid.ColumnSpan="2">
+                        <Label x:Name="MainName" Content="Б.А.С.К.А.К.О.В.А." HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" FontFamily="Impact" FontSize="72" Foreground="#FFDEF50C" Loaded="MainName_Loaded" Opacity="0"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="Black"/>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="Black"/>
+                    <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="190" Height="80">
+                        <Button Content="Создать игру" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Black" Foreground="#FFFFF500" FontFamily="Impact" FontSize="24" Click="Button_Click" BorderThickness="4" Style="{StaticResource MainMenuButton}"/>
+                    </Grid>
+                    <Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="190" Height="80">
+                        <Button Content="Присоединиться" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FFFBF200" Background="Black" FontFamily="Impact" FontSize="24" Click="Button_Click_1"/>
+                    </Grid>
+
+
                 </Grid>
             </TabItem>
-            <TabItem x:Name="CreateTab" Header="TabItem">
+            <TabItem x:Name="CreateTab" Header="TabItem" Visibility="Collapsed">
                 <Grid Background="Firebrick"/>
             </TabItem>
-            <TabItem x:Name="JoinTab" HorizontalAlignment="Center" Height="20" Header="TabItem" VerticalAlignment="Center" Width="54">
+            <TabItem x:Name="JoinTab" HorizontalAlignment="Center" Height="20" Header="TabItem" VerticalAlignment="Center" Width="54" Visibility="Collapsed">
                 <Grid Background="Firebrick"/>
             </TabItem>
         </TabControl>

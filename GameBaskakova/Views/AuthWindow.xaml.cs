@@ -76,7 +76,7 @@ namespace GameBaskakova
         private void AuthButton_Click(object sender, RoutedEventArgs e)
         {
             ConnectionCheck();
-            var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+            var connection = new MySqlConnection("server=nyasqlgame.servegame.com;uid=root;pwd=BaskakovaGame123!;database=sys");
             connection.Open();
             string commandstr = $"SELECT * FROM sys.test WHERE name = '{LoginName.Text}' AND pass = '{LoginPass.Text}'";
             var commandexec = new MySqlCommand(commandstr, connection);
@@ -102,7 +102,7 @@ namespace GameBaskakova
             ConnectionCheck();
             try
             {
-                var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+                var connection = new MySqlConnection("server=nyasqlgame.servegame.com;uid=root;pwd=BaskakovaGame123!;database=sys");
                 connection.Open();
                 string commandstr = $"INSERT INTO sys.test VALUES (null,'{RegName.Text}', '{RegPass.Text}')";
                 var commandexec = new MySqlCommand(commandstr, connection);
@@ -126,7 +126,7 @@ namespace GameBaskakova
             } 
             catch (Exception er)
             {
-                var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+                var connection = new MySqlConnection("server=nyasqlgame.servegame.com;uid=root;pwd=BaskakovaGame123!;database=sys");
                 connection.Open();
                 var commandexec = new MySqlCommand("select max(idtest) from sys.test", connection);
                 MySqlDataReader myReader;
@@ -157,11 +157,13 @@ namespace GameBaskakova
             {
                 ConCheck.Value = 2;
                 ConLabel.Content = "Попытка открыть соединение";
-                var connection = new MySqlConnection("server=128.75.115.21;uid=root;pwd=BaskakovaGame123!;database=sys");
+                var connection = new MySqlConnection("server=nyasqlgame.servegame.com;uid=root;pwd=BaskakovaGame123!;database=sys");
                 connection.Open();
                 var commandexec = new MySqlCommand("select max(idtest) from sys.test", connection);
                 MySqlDataReader myReader = commandexec.ExecuteReader();
                 check = myReader.Read();
+                connection.Close();
+                myReader.Close();
             }
             catch (Exception er)
             {
